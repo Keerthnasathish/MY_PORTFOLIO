@@ -1,0 +1,106 @@
+.magic-bento-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  width: 100%;
+}
+
+.magic-bento-card {
+  background: var(--bg-card);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+  padding: 2rem;
+  transition: transform 0.2s ease-out, border-color 0.3s;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.magic-bento-card.glow-enabled:hover {
+  border-color: rgba(0, 245, 255, 0.5);
+  box-shadow: 0 0 20px rgba(0, 245, 255, 0.1);
+}
+
+.bento-spotlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    var(--spotlight-radius) circle at var(--mouse-x) var(--mouse-y),
+    var(--glow-color),
+    transparent 40%
+  );
+  opacity: 0.15;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.bento-content {
+  position: relative;
+  z-index: 3;
+}
+
+.bento-label {
+  font-size: 0.75rem;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+  border-color: var(--accent-cyan);
+}
+
+.bento-title {
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.bento-description {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.bento-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.bento-tag {
+  font-size: 0.8rem;
+  color: var(--accent-cyan);
+  background: rgba(0, 245, 255, 0.1);
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+}
+
+.bento-particle {
+  position: absolute;
+  background: var(--accent-cyan);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  box-shadow: 0 0 10px var(--accent-cyan);
+  animation: floatParticle 2s ease-out infinite;
+}
+
+@keyframes floatParticle {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.5);
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(var(--mouse-x) * 0.05px), calc(var(--mouse-y) * -0.05px)) scale(1.2);
+  }
+}
